@@ -1,0 +1,30 @@
+name: Kuma Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: echo "Building..."
+
+      - name: Configure Git
+        run: git config pull.rebase true
+        
+      - name: Deploy to Ubuntu VM
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd uptime-kuma/
+            git pull origin master
