@@ -15,9 +15,6 @@ jobs:
 
       - name: Build
         run: echo "Building..."
-
-      - name: Configure Git
-        run: git config pull.rebase true
         
       - name: Deploy to Ubuntu VM
         uses: appleboy/ssh-action@master
