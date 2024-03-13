@@ -15,7 +15,6 @@ jobs:
 
       - name: Build
         run: echo "Building..."
-        shell: bash
         
       - name: Deploy to Ubuntu VM
         uses: appleboy/ssh-action@master
@@ -23,7 +22,6 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          run: |
+          script: |
             cd uptime-kuma/
             git pull https://github.com/AshrafSalah1/uptime-kuma.git
-          shell: bash  
